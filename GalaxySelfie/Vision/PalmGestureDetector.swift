@@ -1,5 +1,6 @@
 import CoreImage
 import Foundation
+import ImageIO
 import Vision
 
 final class PalmGestureDetector {
@@ -9,7 +10,7 @@ final class PalmGestureDetector {
         self.classifier = classifier
     }
 
-    func detectPalm(in pixelBuffer: CVPixelBuffer, orientation: CGImagePropertyOrientation) -> Bool {
+    func detectPalm(in pixelBuffer: CVPixelBuffer, orientation: CGImagePropertyOrientation) async -> Bool {
         false
     }
 }

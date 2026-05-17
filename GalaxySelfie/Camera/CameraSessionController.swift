@@ -1,10 +1,13 @@
 import AVFoundation
 import Foundation
+import ImageIO
 
 final class CameraSessionController: NSObject, ObservableObject {
     let session = AVCaptureSession()
+    let photoOutput = AVCapturePhotoOutput()
 
     @Published private(set) var authorizationState: CameraAuthorizationState = .notDetermined
+    var onFrame: ((CameraFrame) -> Void)?
 
     func requestCameraAccess() async -> Bool {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
@@ -34,8 +37,20 @@ final class CameraSessionController: NSObject, ObservableObject {
     }
 }
 
+struct CameraFrame {
+    var pixelBuffer: CVPixelBuffer
+    var orientation: CGImagePropertyOrientation
+}
+
 enum CameraAuthorizationState: Equatable {
     case notDetermined
     case authorized
     case denied
+}
+
+enum CameraSessionError: Error, Equatable {
+    case frontCameraUnavailable
+    case cannotAddInput
+    case cannotAddVideoOutput
+    case cannotAddPhotoOutput
 }

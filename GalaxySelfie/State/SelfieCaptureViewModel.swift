@@ -2,10 +2,23 @@ import Foundation
 
 @MainActor
 final class SelfieCaptureViewModel: ObservableObject {
+    static let palmHoldDuration: TimeInterval = 1
+    static let countdownSeconds = 5
+    static let captureCount = 10
+
     @Published private(set) var state: SelfieCaptureState = .idle
+    @Published private(set) var isPalmCurrentlyDetected = false
 
     var statusText: String {
         state.statusText
+    }
+
+    func handlePalmDetection(_ detected: Bool, at date: Date = Date()) {
+        isPalmCurrentlyDetected = detected
+    }
+
+    func cancelCountdown() {
+        state = .idle
     }
 }
 
