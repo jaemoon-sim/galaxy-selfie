@@ -13,6 +13,15 @@ struct CameraPreviewView: UIViewRepresentable {
 
     func updateUIView(_ uiView: PreviewView, context: Context) {
         uiView.videoPreviewLayer.session = session
+        if let connection = uiView.videoPreviewLayer.connection {
+            connection.automaticallyAdjustsVideoMirroring = false
+            if connection.isVideoMirroringSupported {
+                connection.isVideoMirrored = true
+            }
+            if connection.isVideoRotationAngleSupported(90) {
+                connection.videoRotationAngle = 90
+            }
+        }
     }
 }
 

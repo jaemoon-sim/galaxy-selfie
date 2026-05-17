@@ -7,8 +7,8 @@ iOS용 전면 카메라 셀피 앱을 만든다. 화면 속 인물이 손바닥�
 ## Current Context
 
 - 프로젝트 루트는 `/Users/jmsim/Documents/galaxy-selfie`이다.
-- 현재 폴더는 비어 있으며 `.git` 저장소가 아니다.
-- 기존 Xcode 프로젝트, 소스 코드, README, 테스트, CI 설정은 없다.
+- 초기에는 폴더가 비어 있었고 `.git` 저장소가 아니었다.
+- 현재는 git 저장소가 초기화되어 있고, SwiftUI 기반 `GalaxySelfie.xcodeproj`, 앱 소스, 테스트, README가 생성되어 있다.
 - 로컬 개발 환경:
   - `xcodebuild -version`: Xcode 26.4.1, Build version 17E202
   - 사용 가능한 시뮬레이터: iOS 26.4 계열 iPhone/iPad 시뮬레이터
@@ -215,6 +215,18 @@ xcodebuild -project GalaxySelfie.xcodeproj -scheme GalaxySelfie -destination 'pl
   - 완화: 순수 로직 단위 테스트와 실제 iPhone 수동 검증을 분리
 - Apple 기본 카메라의 Burst 결과물 UI와 완전히 동일한 저장/그룹핑은 공개 API로 재현하기 어렵다.
   - 완화: 10장의 개별 사진을 Photos에 저장하는 것을 1차 요구사항의 완료 기준으로 명시
+
+## Dispatch Status
+
+- `dispatch-plan` 실행 중 세 워커를 `/private/tmp` worktree에 배정했다.
+  - `dispatch/tmp-vision-palm`: `/private/tmp/galaxy-selfie-dispatch-vision`
+  - `dispatch/tmp-camera-photos`: `/private/tmp/galaxy-selfie-dispatch-camera`
+  - `dispatch/tmp-ui-state`: `/private/tmp/galaxy-selfie-dispatch-ui`
+- 세 워커 모두 장시간 최종 보고 없이 running 상태에 머물러 세션을 중단했다. worktree와 branch는 삭제하지 않고 보존했다.
+- Vision worker가 남긴 미커밋 `HandPoseClassifier` 일부 구현은 main worktree에서 검토 후 수동 반영했다.
+- Camera/Photos/UI/State 구현은 main worktree에서 통합 완료했다.
+- 시뮬레이터 테스트는 통과했다.
+- 실제 전면 카메라 입력, Vision 손바닥 인식 품질, Photos 저장은 실제 iPhone에서 추가 검증해야 한다.
 
 ## Open Questions
 
