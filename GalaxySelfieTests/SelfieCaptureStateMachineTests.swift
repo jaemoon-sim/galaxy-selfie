@@ -70,6 +70,10 @@ final class SelfieCaptureStateMachineTests: XCTestCase {
     }
 
     func testCaptureProgressStatusText() {
-        XCTAssertEqual(SelfieCaptureState.capturing(3, total: 10).statusText, "3/10")
+        XCTAssertEqual(SelfieCaptureViewModel.captureCount, 3)
+        XCTAssertEqual(
+            SelfieCaptureState.capturing(3, total: SelfieCaptureViewModel.captureCount).statusText,
+            "3/3"
+        )
     }
 }

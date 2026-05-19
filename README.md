@@ -8,7 +8,7 @@
 - Vision 기반 손 포즈 감지 구현 완료
 - 열린 손바닥 1초 유지 시 촬영 트리거 구현 완료
 - 5초 카운트다운 구현 완료
-- 10장 연속 촬영 구현 완료
+- 3장 연속 촬영 구현 완료
 - 사진 앱 저장 구현 완료
 - 실기기에서 손바닥 인식 동작 확인 완료
 
@@ -17,7 +17,7 @@
 1. 앱을 실행하면 전면 카메라 프리뷰가 표시됩니다.
 2. 사용자가 손바닥을 펼친 상태를 약 1초 유지합니다.
 3. 앱이 열린 손바닥을 인식하면 5초 카운트다운을 시작합니다.
-4. 카운트다운이 끝나면 사진 10장을 순차 촬영합니다.
+4. 카운트다운이 끝나면 사진 3장을 순차 촬영합니다.
 5. 촬영된 사진은 iPhone 사진 앱에 저장됩니다.
 
 ## 구현 메모
@@ -33,7 +33,7 @@
 
 - `GalaxySelfie/ContentView.swift`: 카메라 프리뷰와 촬영 상태 UI
 - `GalaxySelfie/Camera/CameraSessionController.swift`: 전면 카메라 세션 관리
-- `GalaxySelfie/Camera/PhotoCaptureCoordinator.swift`: 10장 연속 촬영 조율
+- `GalaxySelfie/Camera/PhotoCaptureCoordinator.swift`: 3장 연속 촬영 조율
 - `GalaxySelfie/Vision/PalmGestureDetector.swift`: 카메라 프레임을 Vision 손 포즈 요청으로 분석
 - `GalaxySelfie/Vision/HandPoseClassifier.swift`: 열린 손바닥 판정 로직
 - `GalaxySelfie/Photos/PhotoLibrarySaver.swift`: 사진 앱 저장
@@ -99,7 +99,7 @@ xcrun devicectl device process launch \
 2. 사진 앱 add-only 저장 권한을 허용합니다.
 3. 전면 카메라 앞에서 손바닥을 펼친 상태를 1초 이상 유지합니다.
 4. 5초 카운트다운이 시작되는지 확인합니다.
-5. 카운트다운 후 10장이 촬영되는지 확인합니다.
+5. 카운트다운 후 3장이 촬영되는지 확인합니다.
 6. 사진 앱에 촬영 결과가 저장되는지 확인합니다.
 7. 주먹, 반쯤 접힌 손, 어두운 조명에서 오인식이 과도하지 않은지 확인합니다.
 
@@ -114,5 +114,5 @@ xcrun devicectl device process launch \
 
 - 다양한 조명, 거리, 손 크기에서 손바닥 판정 임계값 튜닝
 - 촬영 중 UI 피드백과 저장 실패 시 에러 메시지 개선
-- 10장 촬영 간격을 설정값으로 분리
+- 3장 촬영 간격을 설정값으로 분리
 - App Store 배포용 signing, icon, privacy 문구 정리

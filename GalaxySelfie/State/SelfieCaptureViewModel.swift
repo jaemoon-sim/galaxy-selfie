@@ -4,7 +4,7 @@ import Foundation
 final class SelfieCaptureViewModel: ObservableObject {
     static let palmHoldDuration: TimeInterval = 1
     static let countdownSeconds = 5
-    static let captureCount = 10
+    static let captureCount = 3
 
     let cameraSession: CameraSessionController
 
